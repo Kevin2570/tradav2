@@ -1,0 +1,14 @@
+'use client';import { useState } from 'react';
+export default function ProfilePage(){const [email,setEmail]=useState('');const [name,setName]=useState('');const [borough,setBorough]=useState('Manhattan');const [matchStyle,setMatchStyle]=useState('Open-Ended');const [offers,setOffers]=useState('');const [wants,setWants]=useState('');const [status,setStatus]=useState('');
+async function createProfile(){setStatus('Saving...');const res=await fetch('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,name,borough,matchStyle,offers:offers.split(',').map(s=>s.trim()).filter(Boolean),wants:wants.split(',').map(s=>s.trim()).filter(Boolean)})});if(!res.ok){setStatus('Error saving.');return;}setStatus('Saved! Go explore matches.');}
+return (<div className="container" style={{padding:'32px 0'}}><h1 className="h2">Create Profile</h1><p className="muted">Add your info, offers, and wants. Use commas to separate multiple items.</p>
+<div className="card" style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+<div><label>Email</label><input value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@email.com" style={{width:'100%',padding:10,borderRadius:8,border:'1px solid #ddd'}}/></div>
+<div><label>Name</label><input value={name} onChange={e=>setName(e.target.value)} placeholder="Your name" style={{width:'100%',padding:10,borderRadius:8,border:'1px solid #ddd'}}/></div>
+<div><label>Borough</label><select value={borough} onChange={e=>setBorough(e.target.value)} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid #ddd'}}><option>Manhattan</option><option>Brooklyn</option><option>Queens</option><option>Bronx</option><option>Staten Island</option></select></div>
+<div><label>Match Style</label><select value={matchStyle} onChange={e=>setMatchStyle(e.target.value)} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid #ddd'}}><option>Open-Ended</option><option>Strict</option></select></div>
+<div style={{gridColumn:'1/-1'}}><label>Offers (comma-separated)</label><input value={offers} onChange={e=>setOffers(e.target.value)} placeholder="chess lessons, dog walking, vintage t-shirts" style={{width:'100%',padding:10,borderRadius:8,border:'1px solid #ddd'}}/></div>
+<div style={{gridColumn:'1/-1'}}><label>Wants (comma-separated)</label><input value={wants} onChange={e=>setWants(e.target.value)} placeholder="workout coach, business mentor" style={{width:'100%',padding:10,borderRadius:8,border:'1px solid #ddd'}}/></div>
+</div>
+<div style={{marginTop:16,display:'flex',gap:12}}><button className="btn" onClick={createProfile}>Save Profile</button><a className="btn" href="/explore" style={{background:'#00D8A4'}}>Explore</a></div>
+<div style={{marginTop:10}} className="muted">{status}</div></div>)}
