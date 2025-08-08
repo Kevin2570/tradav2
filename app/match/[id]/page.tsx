@@ -1,4 +1,4 @@
-import { prisma } from '../../../../lib/prisma';
+import { prisma } from '../../../lib/prisma';
 function overlap(a:string[],b:string[]){const A=new Set(a.map(s=>s.toLowerCase()));const B=new Set(b.map(s=>s.toLowerCase()));return [...A].filter(x=>B.has(x));}
 export default async function MatchPage({params}:{params:{id:string}}){const me=await prisma.user.findUnique({where:{id:params.id},include:{offers:true,wants:true}});if(!me)return <div className="container" style={{padding:'32px 0'}}>User not found.</div>;
 const all=await prisma.user.findMany({where:{NOT:{id:me.id}},include:{offers:true,wants:true}});
