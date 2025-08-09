@@ -1,23 +1,19 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/prisma';
-import { z } from 'zod';
-
-const Body = z.object({
-  threadId: z.string(),
-  authorId: z.string(),
-  text: z.string().min(1),
-});
 
 export async function POST(req: Request) {
   try {
-    const data = Body.parse(await req.json());
+    const body = await req.json();
+    const { threadId, authorId, text } = body ?? {};
+
+    if (!threadId || !authorId || typeof text !== 'string' || !text.trim()) {
+      return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
+    }
+
     const msg = await prisma.message.create({
-      data: {
-        threadId: data.threadId,
-        authorId: data.authorId,
-        text: data.text,
-      },
+      data: { threadId, authorId, text: text.trim() },
     });
+
     return NextResponse.json(msg);
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 400 });
