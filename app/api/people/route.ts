@@ -7,7 +7,6 @@ export async function GET() {
     orderBy: { createdAt: 'desc' },
   });
 
-  // Explicitly type the map params so TS doesn't complain
   const data = users.map((u: any) => ({
     id: u.id,
     name: u.name,
