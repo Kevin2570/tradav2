@@ -2,11 +2,7 @@
 import { prisma } from '../../../lib/prisma';
 import ThreadBox from './threadbox';
 
-export default async function Thread({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function Thread({ params }: { params: { slug: string } }) {
   const [a, b] = params.slug.split('-');
 
   let thread =
