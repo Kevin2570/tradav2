@@ -7,11 +7,7 @@ export const metadata = {
     'Trade skills, goods, and services with NYC locals. No cash. Just connection.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -28,12 +24,7 @@ export default function RootLayout({
             <Link href="/" className="font-bold">
               Trada NYC
             </Link>
-            <div
-              style={{
-                display: 'flex',
-                gap: 16,
-              }}
-            >
+            <div style={{ display: 'flex', gap: 16 }}>
               <Link href="/explore">Explore</Link>
               <Link href="/profile">Create Profile</Link>
               <a href="#waitlist">Waitlist</a>
@@ -42,10 +33,7 @@ export default function RootLayout({
         </nav>
         {children}
         <footer style={{ borderTop: '1px solid #eee', marginTop: 24 }}>
-          <div
-            className="container"
-            style={{ padding: '24px 0', color: '#555', fontSize: 14 }}
-          >
+          <div className="container" style={{ padding: '24px 0', color: '#555', fontSize: 14 }}>
             © 2025 Trada NYC — barter@trada.city — @tradaNYC
           </div>
         </footer>
