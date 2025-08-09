@@ -30,7 +30,6 @@ export async function POST(req: Request) {
       },
     });
 
-    // replace offers/wants atomically for simplicity
     await prisma.offer.deleteMany({ where: { userId: user.id } });
     await prisma.want.deleteMany({ where: { userId: user.id } });
 
