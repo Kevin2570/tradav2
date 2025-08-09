@@ -1,14 +1,11 @@
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
-  // If you're still on SQLite for now:
   provider = "sqlite"
-  url      = "file:./dev.db"
-  // If you later switch to Postgres, change the above 2 lines to:
-  // provider = "postgresql"
-  // url      = env("DATABASE_URL")
+  url      = "file::memory:?cache=shared"
 }
 
 model User {
