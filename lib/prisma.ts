@@ -1,4 +1,3 @@
-// lib/prisma.ts — Neon (Postgres) via standard Prisma Client
 import { PrismaClient } from '@prisma/client';
 
 const globalForPrisma = globalThis as unknown as {
@@ -7,9 +6,6 @@ const globalForPrisma = globalThis as unknown as {
 
 export const prisma =
   globalForPrisma.prisma ??
-  new PrismaClient({
-    // If needed later:
-    // log: ['query', 'error', 'warn'],
-  });
+  new PrismaClient();
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
