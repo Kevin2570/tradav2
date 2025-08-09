@@ -12,17 +12,20 @@
     "postinstall": "prisma generate && prisma db push"
   },
   "dependencies": {
+    "@prisma/adapter-libsql": "^6.13.0",
     "@prisma/client": "5.16.1",
+    "@prisma/extension-accelerate": "^2.0.2",
+    "libsql": "^0.5.17",
     "next": "14.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "prisma": "5.16.1",
-    "typescript": "5.4.5",
     "@types/node": "20.10.6",
     "@types/react": "18.2.66",
-    "@types/react-dom": "18.2.22"
+    "@types/react-dom": "18.2.22",
+    "prisma": "5.16.1",
+    "typescript": "5.4.5"
   }
 }
