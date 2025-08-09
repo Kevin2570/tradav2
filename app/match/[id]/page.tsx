@@ -8,11 +8,7 @@ function overlap(a: string[], b: string[]) {
   return [...A].filter((x) => B.has(x));
 }
 
-export default async function MatchPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function MatchPage({ params }: { params: { id: string } }) {
   const me = await prisma.user.findUnique({
     where: { id: params.id },
     include: { offers: true, wants: true },
