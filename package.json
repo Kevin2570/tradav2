@@ -12,9 +12,8 @@
     "postinstall": "prisma generate && prisma db push"
   },
   "dependencies": {
-    "@prisma/adapter-libsql": "^6.13.0",
+    "@libsql/client": "^0.15.10",
     "@prisma/client": "5.16.1",
-    "@prisma/extension-accelerate": "^2.0.2",
     "libsql": "^0.5.17",
     "next": "14.2.5",
     "react": "18.2.0",
