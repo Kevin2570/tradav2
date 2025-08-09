@@ -2,16 +2,6 @@
 import { prisma } from '../../../lib/prisma';
 import Link from 'next/link';
 
-type Item = { text: string };
-type UserWithLists = {
-  id: string;
-  name: string;
-  borough: string | null;
-  matchStyle: 'Strict' | 'Open-Ended' | string;
-  offers: Item[];
-  wants: Item[];
-};
-
 function overlap(a: string[], b: string[]) {
   const A = new Set(a.map((s) => s.toLowerCase()));
   const B = new Set(b.map((s) => s.toLowerCase()));
@@ -23,10 +13,10 @@ export default async function MatchPage({
 }: {
   params: { id: string };
 }) {
-  const me = (await prisma.user.findUnique({
+  const me = await prisma.user.findUnique({
     where: { id: params.id },
     include: { offers: true, wants: true },
-  })) as UserWithLists | null;
+  });
 
   if (!me) {
     return (
@@ -36,19 +26,18 @@ export default async function MatchPage({
     );
   }
 
-  const all = (await prisma.user.findMany({
+  const all = await prisma.user.findMany({
     where: { NOT: { id: me.id } },
     include: { offers: true, wants: true },
-  })) as UserWithLists[];
+  });
 
-type Item={text:string};
-const meOffers=me.offers.map((o:Item)=>o.text);const meWants=me.wants.map((w:Item)=>w.text);
-const matches=all.map((other:any)=>{const theirOffers=other.offers.map((o:Item)=>o.text);const theirWants=other.wants.map((w:Item)=>w.text);let ok=false; ...
+  const meOffers = me.offers.map((o: { text: string }) => o.text);
+  const meWants = me.wants.map((w: { text: string }) => w.text);
 
   const matches = all
-    .map((other: UserWithLists) => {
-      const theirOffers = (other.offers as Item[]).map((o: Item) => o.text);
-      const theirWants = (other.wants as Item[]).map((w: Item) => w.text);
+    .map((other) => {
+      const theirOffers = other.offers.map((o: { text: string }) => o.text);
+      const theirWants = other.wants.map((w: { text: string }) => w.text);
 
       let ok = false;
       if (me.matchStyle === 'Strict') {
@@ -84,12 +73,7 @@ const matches=all.map((other:any)=>{const theirOffers=other.offers.map((o:Item)=
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         {matches.map(({ other, give, get }) => (
           <div key={other.id} className="card">
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <b>{other.name}</b>
               <span className="muted">{other.borough || 'NYC'}</span>
             </div>
