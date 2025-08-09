@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@libsql/client": "^0.15.10",
-    "@prisma/client": "5.16.1",
     "libsql": "^0.5.17",
     "next": "14.2.5",
     "react": "18.2.0",
@@ -24,7 +23,6 @@
     "@types/node": "20.10.6",
     "@types/react": "18.2.66",
     "@types/react-dom": "18.2.22",
-    "prisma": "5.16.1",
     "typescript": "5.4.5"
   }
 }
