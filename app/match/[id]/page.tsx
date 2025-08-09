@@ -41,8 +41,9 @@ export default async function MatchPage({
     include: { offers: true, wants: true },
   })) as UserWithLists[];
 
-  const meOffers = (me.offers as Item[]).map((o: Item) => o.text);
-  const meWants = (me.wants as Item[]).map((w: Item) => w.text);
+type Item={text:string};
+const meOffers=me.offers.map((o:Item)=>o.text);const meWants=me.wants.map((w:Item)=>w.text);
+const matches=all.map((other:any)=>{const theirOffers=other.offers.map((o:Item)=>o.text);const theirWants=other.wants.map((w:Item)=>w.text);let ok=false; ...
 
   const matches = all
     .map((other: UserWithLists) => {
