@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postinstall": "pwd && ls -la && echo '--- prisma dir ---' && ls -la prisma || true && prisma generate --schema=./prisma/schema.prisma && prisma db push --schema=./prisma/schema.prisma"
+   "postinstall": "prisma generate && prisma db push && ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "5.16.1",
