@@ -5,11 +5,11 @@
   "name": "trada-fullstack-mvp",
   "private": true,
   "version": "0.1.0",
- "scripts": {
+"scripts": {
   "dev": "next dev",
   "build": "next build",
   "start": "next start",
-  "postinstall": "node scripts/check-db-url.mjs && prisma generate --schema=./prisma/schema.prisma && prisma db push --schema=./prisma/schema.prisma"
+  "postinstall": "pwd && ls -la && echo '--- prisma dir ---' && ls -la prisma || true && prisma generate --schema=./prisma/schema.prisma && prisma db push --schema=./prisma/schema.prisma"
 }
   "dependencies": {
     "@prisma/client": "5.16.1",
