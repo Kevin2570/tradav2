@@ -1,16 +1,16 @@
-"prisma": {
-  "schema": "prisma/schema.prisma"
-}
 {
   "name": "trada-fullstack-mvp",
   "private": true,
   "version": "0.1.0",
-"scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "postinstall": "pwd && ls -la && echo '--- prisma dir ---' && ls -la prisma || true && prisma generate --schema=./prisma/schema.prisma && prisma db push --schema=./prisma/schema.prisma"
-}
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "postinstall": "pwd && ls -la && echo '--- prisma dir ---' && ls -la prisma || true && prisma generate --schema=./prisma/schema.prisma && prisma db push --schema=./prisma/schema.prisma"
+  },
   "dependencies": {
     "@prisma/client": "5.16.1",
     "next": "14.2.5",
